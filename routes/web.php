@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/produk', function () {
+    return 'Halaman Katalog Produk';
+});
+
+Route::get('/profil', function () {
+    return 'Halaman Profil';
+});
+
+Route::get('/daftarpembeli', function () {
+    return 'Halaman Daftar Akun Pembeli';
+});
