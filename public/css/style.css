@@ -2,3 +2,43 @@ body {
     background-color: rgba(6, 27, 35, 1);
     font-family: 'Quicksand';
 }
+
+.kedelai{
+    color: rgba(54, 211, 154, 1);
+    margin-left: 100px; 
+    margin-top: 30px;
+}
+
+.rectangle1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 0px 0px 0px 25px;
+    background-color: rgba(54, 211, 154, 1);
+    height: 70px;
+    width: 210px;
+}
+
+.home1 {
+    height: 35px;
+    margin-left: 50px;
+    margin-top: 15px;
+    padding: 0;
+}
+
+.user1 {
+    height: 35px;
+    margin-left: 50px;
+    margin-top: 15px;
+    padding: 0;
+}
+
+.title {
+    color: white;
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 67px;
+    min-height: 135px;
+    width: 755px;
+}
