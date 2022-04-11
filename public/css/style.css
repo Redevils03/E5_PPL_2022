@@ -34,11 +34,25 @@ body {
 }
 
 .title {
-    color: white;
-    font-size: 64px;
-    font-weight: 700;
-    letter-spacing: 0;
-    line-height: 67px;
+    margin-left: 100px;
+    margin-top: 200px;
+    font-size: 40px;
+    font-weight: bolder;
+    line-height: 200%;
     min-height: 135px;
     width: 755px;
+}
+
+.title-text {
+    color: white;
+    margin-left: 100px;
+    font-weight: 100;
+    width: 600px;
+}
+
+.rectangle2 {
+    border-radius: 25px 25px 25px 25px;
+    background-color: rgba(54, 211, 154, 1);
+    height: 70px;
+    width: 210px;
 }

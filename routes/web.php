@@ -28,3 +28,7 @@ Route::get('/profil', function () {
 Route::get('/daftarpembeli', function () {
     return 'Halaman Daftar Akun Pembeli';
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
