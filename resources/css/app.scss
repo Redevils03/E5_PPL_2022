@@ -1,0 +1,25 @@
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600&display=swap');
+
+body {
+    background-color: rgba(6, 27, 35, 1);
+    font-family: 'Quicksand', sans-serif !important;
+}
+
+h1, .h1 {
+    font-size: calc(1.35rem + 2.5vw);
+}
+
+h4, .h4 {
+    font-size: calc(0.3rem + 1.5vw);
+}
+@media (min-width: 700px) {
+    h4, .h4 {
+        font-size: 20px;
+    }
+}
+
+p {
+    font-size: calc(0.2rem + 1.2vw);
+    width: calc(12rem + 24vw);
+}

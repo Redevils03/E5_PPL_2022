@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('landing');
 });
 
 Route::get('/produk', function () {
@@ -28,7 +28,3 @@ Route::get('/profil', function () {
 Route::get('/daftarpembeli', function () {
     return 'Halaman Daftar Akun Pembeli';
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
