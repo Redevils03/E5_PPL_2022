@@ -52,7 +52,7 @@
     text-justify: inter-word;
 }
 
-.btn {
+.btn-landing {
     font-size: calc(8px + 0.7vw);
     margin-top: calc(3px + 1vw);
     margin-left: calc(10px + 5vw);
@@ -112,5 +112,12 @@
     border-radius: 50%;
     z-index: 2;
 }
-  
 
+a, a:link, a:visited {
+    font-size: 14px;
+}
+
+.modal-content {
+    padding-left: 20px;
+    padding-right: 20px;
+}

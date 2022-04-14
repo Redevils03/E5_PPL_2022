@@ -11305,6 +11305,47 @@ p {
   width: calc(12rem + 24vw);
 }
 
+a, a:link, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.bg-custom {
+  background-color: rgb(21, 23, 29);
+}
+
+.form-control::-moz-placeholder {
+  font-weight: 700;
+}
+
+.form-control::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  font-weight: 700;
+}
+
+.form-control::-moz-placeholder {
+  /* Firefox 19+ */
+  font-weight: 700;
+}
+
+.form-control:-ms-input-placeholder {
+  /* IE 10+ */
+  font-weight: 700;
+}
+
+.form-control:-moz-placeholder {
+  /* Firefox 18- */
+  font-weight: 700;
+}
+
+.form-control:focus, .form-select:focus {
+  box-shadow: none;
+}
+
 .kedelai {
   margin-top: 20px;
   position: relative;
@@ -11357,7 +11398,7 @@ p {
   text-justify: inter-word;
 }
 
-.btn {
+.btn-landing {
   font-size: calc(8px + 0.7vw);
   margin-top: calc(3px + 1vw);
   margin-left: calc(10px + 5vw);
@@ -11416,4 +11457,13 @@ p {
   background-image: linear-gradient(rgb(6, 27, 35), rgb(54, 211, 154));
   border-radius: 50%;
   z-index: 2;
+}
+
+a, a:link, a:visited {
+  font-size: 14px;
+}
+
+.modal-content {
+  padding-left: 20px;
+  padding-right: 20px;
 }
