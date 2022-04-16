@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/produk', function () {
-    return 'Halaman Katalog Produk';
+    return view('produk');
 });
 
 Route::get('/profil', function () {

@@ -2,7 +2,6 @@
 @section('title', 'Kedelai Kamila')
 
 @section('import')
-<link href="{{ mix('css/app.css') }}" rel="stylesheet" >
 <link href="{{ mix('css/landing.css') }}" rel="stylesheet" >
 <script defer src="{{ mix('js/landing.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -10,14 +9,7 @@
 @endsection
 
 <body style="overflow: hidden"> 
-@section('landing')
-    {{-- <div>
-        <?php
-        // if(isset($_POST['create'])){
-        //     $
-        // }
-        ?>
-    </div> --}}
+@section('content')
     <div>
         <div class="modal fade" id="LoginShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -52,10 +44,10 @@
                     </div>
                     <form class="modal-body needs-validation" novalidate>
                         <div class="has-validation">
-                            <input type="text" class="form-control" placeholder="Masukkan Email" required>
-                            <input type="password" class="form-control mt-4" placeholder="Password" required>
-                            <input type="text" class="form-control mt-4" placeholder="Masukkan nama" required>
-                            <input type="text" class="form-control mt-4" placeholder="Masukkan alamat" required>
+                            <input name="email" type="text" class="form-control" placeholder="Masukkan Email" required>
+                            <input name="password" type="password" class="form-control mt-4" placeholder="Password" required>
+                            <input name="nama" type="text" class="form-control mt-4" placeholder="Masukkan nama" required>
+                            <input name="alamat" type="text" class="form-control mt-4" placeholder="Masukkan alamat" required>
                             <select class="form-select mt-4">
                                 <option value="1">Laki-Laki</option>
                                 <option value="2">Perempuan</option>
@@ -81,8 +73,8 @@
         <div class="circle"></div>
         <h4 class="kedelai"><b>Kedelai Kamila</b></h4>
         <div class="rectangle1">
-            <a href="#"><img class="home1" src="img/home.png"></a>
-            <a href="#"><img class="user1" src="img/user.png"></a>
+            <a href="#"><img class="home1" data-bs-toggle="modal" data-bs-target="#LoginShow" src="img/home.png"></a>
+            <a href="#"><img class="user1" data-bs-toggle="modal" data-bs-target="#LoginShow" src="img/user.png"></a>
         </div>
 
         <div class="title1">

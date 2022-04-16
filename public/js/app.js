@@ -2162,7 +2162,25 @@ module.exports = {
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // $(document).ready(function () {
+//     $("#sidebar").mCustomScrollbar({
+//         theme: "minimal"
+//     });
+//     $('#dismiss, .overlay').on('click', function () {
+//         // hide sidebar
+//         $('#sidebar').removeClass('active');
+//         // hide overlay
+//         $('.overlay').removeClass('active');
+//     });
+//     $('#sidebarCollapse').on('click', function () {
+//         // open sidebar
+//         $('#sidebar').addClass('active');
+//         // fade in the overlay
+//         $('.overlay').addClass('active');
+//         $('.collapse.in').toggleClass('in');
+//         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+//     });
+// });
 
 /***/ }),
 
@@ -19422,6 +19440,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/produk.scss":
+/*!***********************************!*\
+  !*** ./resources/css/produk.scss ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/landing.scss":
 /*!************************************!*\
   !*** ./resources/css/landing.scss ***!
@@ -19741,6 +19772,7 @@ process.umask = function() { return 0; };
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
 /******/ 			"css/landing": 0,
+/******/ 			"css/produk": 0,
 /******/ 			"css/app": 0
 /******/ 		};
 /******/ 		
@@ -19791,9 +19823,10 @@ process.umask = function() { return 0; };
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/landing","css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/landing","css/app"], () => (__webpack_require__("./resources/css/app.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/landing","css/app"], () => (__webpack_require__("./resources/css/landing.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/landing","css/produk","css/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/landing","css/produk","css/app"], () => (__webpack_require__("./resources/css/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/landing","css/produk","css/app"], () => (__webpack_require__("./resources/css/produk.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/landing","css/produk","css/app"], () => (__webpack_require__("./resources/css/landing.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

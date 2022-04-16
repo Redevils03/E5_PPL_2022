@@ -11,6 +11,6 @@
 
 </head>
 <body>
-    @yield('landing')
+    @yield('content')
 </body>
 </html>

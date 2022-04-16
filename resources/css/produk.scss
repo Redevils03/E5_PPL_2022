@@ -1,0 +1,67 @@
+@import "./app.scss";
+
+.kedelai1 {
+    margin-top: 20px;
+    position: relative;
+    color: rgb(54, 211, 154);
+    margin-left: calc(10px + 5vw);
+}
+
+.rectangle1 {
+    position: relative;
+    border-radius: 0px 0px 0px 25px;
+    background-color: rgb(54, 211, 154);
+    height: calc(2.5rem + 2.2vw);
+    width: calc(5.5rem + 17vw);
+}
+@media (min-width: 1000px) {
+    .rectangle1 {
+        height: 60px;
+        width: 250px;
+    }
+}
+
+.home1 {
+    height: calc(1.1rem + 0.8vw);
+    margin-left: calc(0.8rem + 3vw);
+    margin-top: 15px;
+    padding: 0;
+}
+@media (min-width: 1000px) {
+    .home1 {
+        height: 25px;
+        margin-left: 50px;
+        margin-top: 15px;
+    }
+}
+
+h2, .h2 {
+    font-size: calc(1rem + 1.5vw);
+}
+
+.card-img-top{
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.container-fluid {
+    padding-top: 50px;
+    padding-left: 65px;
+    padding-right: 65px;
+}
+
+.dropdown-menu {
+    background-color: rgba(13, 168, 111, 1);
+    margin-top: 80px;
+    margin-left: 80px;
+    width: 300px;
+    height: 800px;
+}
+
+a, a:link, a:visited {
+    font-size: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+}

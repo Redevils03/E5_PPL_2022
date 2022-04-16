@@ -11305,11 +11305,6 @@ p {
   width: calc(12rem + 24vw);
 }
 
-a, a:link, a:visited {
-  text-decoration: none;
-  color: inherit;
-}
-
 .modal {
   background-color: rgba(0, 0, 0, 0.9);
 }
