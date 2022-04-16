@@ -15,4 +15,5 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/landing.js', 'public/js')
     .sass('resources/css/app.scss', 'public/css')
     .sass('resources/css/produk.scss', 'public/css')
+    .sass('resources/css/profil.scss', 'public/css')
     .sass('resources/css/landing.scss', 'public/css');

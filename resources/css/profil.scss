@@ -24,7 +24,6 @@
 .home1 {
     position: relative;
     height: calc(1.1rem + 0.8vw);
-    // margin-left: calc(0.8rem + 3vw);
     margin-top: 15px;
     z-index: 1;
 }
@@ -44,22 +43,6 @@
     .drop1 {
         height: 25px;
     }
-}
-
-h2, .h2 {
-    font-size: calc(1rem + 1.5vw);
-}
-
-.card-img-top{
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
-}
-
-.container-fluid {
-    padding-top: 50px;
-    padding-left: 65px;
-    padding-right: 65px;
 }
 
 .dropdown-menu {
@@ -93,12 +76,4 @@ li {
     padding-left: calc(0.35em + 0.75vw);
     padding-right: calc(0.35em + 0.75vw);
     margin-left: 10px;
-}
-
-.card {
-    background-color: rgba(176, 235, 206, 1);
-}
-
-h5, .h5 {
-    font-weight: 600;
 }

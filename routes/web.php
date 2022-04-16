@@ -22,7 +22,7 @@ Route::get('/produk', function () {
 });
 
 Route::get('/profil', function () {
-    return 'Halaman Profil';
+    return view('profil');
 });
 
 Route::get('/daftarpembeli', function () {

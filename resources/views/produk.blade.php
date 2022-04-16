@@ -15,14 +15,14 @@
         <div class="d-flex">
             <h4 class="me-auto kedelai1"><b>Kedelai Kamila</b></h4>
             <div class="rectangle1 d-flex">
-                <a href=""><img class="home1" src="img/home.png"></a>
-                <a href="#"><img class="home1" src="img/user.png"></a>
+                <a href="" class="aVisit aPadd"><img class="home1" src="img/home.png"></a>
+                <a href="/profil" class="aPadd"><img class="home1" src="img/user.png"></a>
                 <div class="dropdown">
-                    <a href="#" id="imageDropdown" data-bs-toggle="dropdown">
-                        <img class="home1" src="img/drop.png">
+                    <a href="#" class="aPadd" id="imageDropdown" data-bs-toggle="dropdown">
+                        <img class="drop1" src="img/drop.png">
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="margin-left: 50px;">Menu item 1</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 1</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 2</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 3</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 4</a></li>
