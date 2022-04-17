@@ -33,23 +33,20 @@
         <h2 class="mt-5" style="text-align: center; color: white;">Katalog Produk</h2>
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <?php
-                $x = 1;
-                while ($x <= 10) {
-                    echo "
+                @foreach ($produk as $key => $data)
                     <div class='col-12 col-md-5 col-lg-4 col-xxl-3'>
                         <div class='card mb-4' style='width: 100%;'>
-                            <img class='card-img-top' src='https://picsum.photos/200/300'>
+                            <img class='card-img-top' src="data:image/png;base64,{{ chunk_split(base64_encode($data->gambar)) }}">
                             <div class='card-body'>
-                                <h5 class='card-title text-center'>Nama Produk</h5>
-                                <p class='card-text text-justify'> Deskripsi </p>
+                                <h5 class='card-title text-center'>{{ $data->nama_produk }}</h5>
+                                <p class='card-text text-justify'> 
+                                    Harga Rp {{ $data->harga_produk }} <br>
+                                    Sisa Stok : {{ $data->jumlah_produk }}
+                                </p>
                             </div>
                         </div>
                     </div>
-                    ";
-                    $x++;
-                }
-                ?>
+                @endforeach
             </div>
         </div>
     </div>
