@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,15 +25,18 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/produk', function () {
-    return view('produk');
+Route::get('/produkadmin', function () {
+    $produk = DB::table('data_produks')->get();
+    return view('produkadmin',['produk'=>$produk]);
 });
 
-Route::get('/produkadmin', function () {
-    return view('produkadmin');
+Route::get('/produk', function () {
+    $produk = DB::table('data_produks')->get();
+    return view('produk',['produk'=>$produk]);
 });
 
 Route::get('/profil', function () {
+    
     return view('profil');
 });
 
