@@ -28,6 +28,10 @@ Route::get('/produk', function () {
     return view('produk');
 });
 
+Route::get('/produkadmin', function () {
+    return view('produkadmin');
+});
+
 Route::get('/profil', function () {
     return view('profil');
 });

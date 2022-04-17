@@ -6,6 +6,11 @@
 <script defer src="{{ mix('js/landing.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<style>
+    .alert{
+        z-index: 2000;
+    }
+</style>
 @endsection
 
 <body style="overflow: hidden"> 
@@ -18,12 +23,12 @@
             </div>
         @endif
 
-        {{-- @if (session()->has('loginError'))
+        @if (session()->has('loginError'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ session('loginError') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        @endif --}}
+        @endif
 
         <div class="modal fade" id="LoginShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -38,7 +43,7 @@
                             <input name="email" id="email" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" required value="{{ old ('email') }}">
                             @error('email')
                                 <div class="invalid-feeback">
-                                    {{ $message }}
+                                    Mohon isikan email dengan format yang sesuai.
                                 </div>
                             @enderror
                         </div>

@@ -18,6 +18,9 @@
         font-weight: 100;
         color: black;
     }
+    .alert{
+        z-index: 2000;
+    }
 </style>
 @endsection
 
@@ -64,7 +67,7 @@
                                     Mohon isikan alamat tempat tinggal saat ini.
                                 </div>
                             @enderror
-                            <select name="jenis_kelamin" id="jenis_kelamin" class="form-select mt-4 @error('jenis_kelamin') is-invalid @enderror">
+                            <select name="jenis_kelamin" id="jenis_kelamin" class="form-select mt-4 @error('jenis_kelamin') is-invalid @enderror" required>
                                 <option value="" disabled selected hidden>Jenis Kelamin</option>
                                 <option value="laki-laki">Laki-Laki</option>
                                 <option value="perempuan">Perempuan</option>

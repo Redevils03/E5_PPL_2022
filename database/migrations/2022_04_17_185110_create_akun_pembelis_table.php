@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('akun_pembeli', function (Blueprint $table) {
-            $table->id();
-            
+        Schema::create('akun_pembelis', function (Blueprint $table) {
+            $table->increments('id_pembeli');
+            $table->string('email',30);
+            $table->string('password');
+            $table->binary('foto')->nullable();
+            $table->string('nama',30);
+            $table->string('nomor_telp',14);
+            $table->string('jenis_kelamin',10);
+            $table->string('alamat',50);
             $table->timestamps();
         });
     }

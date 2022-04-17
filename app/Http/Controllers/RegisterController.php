@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\akun_pembeli;
 use Illuminate\Http\Request;
-use App\Models\User;
 
 class RegisterController extends Controller
 {
@@ -25,7 +25,13 @@ class RegisterController extends Controller
             'jenis_kelamin' => 'required|in:laki-laki,perempuan'
         ]);
 
-        User::create($validateData);
+        $validateData['password'] = bcrypt($validateData['password']);
+
+        akun_pembeli::create($validateData);
+        
+        $request->session()->flash('success', 'Akun berhasil dibuat, silahkan login');
+
+        return redirect(('/login'));
     }
 
 }
