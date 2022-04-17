@@ -29,6 +29,15 @@
             </div>
         </div>
         
+        <a href ="#"><img src="https://picsum.photos/200" class="rounded-circle fotoProfil"></a>
+        <div class="profil1">
+            <h4>Nama Pembeli</h4>
+            <h6>Nomor Telepon : 00000</h6>
+            <h6>Email : loremipsum</h6>
+            <h6>Password : ******</h6>
+            <h6>Alamat : loremipsum</h6>
+            <h6>Jenis Kelamin : Lorem</h6>
+        </div>
     </div>
 @endsection
 </body>

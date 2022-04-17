@@ -11418,3 +11418,15 @@ li {
   padding-right: calc(0.35em + 0.75vw);
   margin-left: 10px;
 }
+
+.fotoProfil {
+  position: relative;
+  margin-top: 100px;
+  width: calc(5em + 5vw);
+  margin-left: calc(10px + 5vw);
+}
+
+.profil1 {
+  color: white;
+  margin-left: calc(10px + 5vw);
+}
