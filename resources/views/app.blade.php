@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>@yield('title')</title>
-    <link rel="icon" href="{{ asset('favicon.ico') }}">
     @yield('import')
 
 </head>

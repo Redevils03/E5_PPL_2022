@@ -24,9 +24,9 @@ class RegisterController extends Controller
             'alamat' => 'required',
             'jenis_kelamin' => 'required|in:laki-laki,perempuan'
         ]);
-
+        
         $validateData['password'] = bcrypt($validateData['password']);
-
+        
         akun_pembeli::create($validateData);
         
         $request->session()->flash('success', 'Akun berhasil dibuat, silahkan login');

@@ -16,6 +16,7 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
+        
         $credentials = $request->validate([
             'email' => 'required|email:rfc,dns',
             'password' => 'required'
@@ -23,14 +24,22 @@ class LoginController extends Controller
         
         if(Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/produkadmin');
+            return redirect()->intended('/produk');
         }
 
         if(Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/produk');
+            return redirect()->intended('/profil');
         }
 
         return back()->with('loginError', 'email atau password salah!');
+    }
+
+    public function logout() 
+    {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/');
     }
 }

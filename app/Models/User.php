@@ -23,7 +23,7 @@ class User extends Model
     //     'email',
     //     'password',
     // ];
-    protected $guarded = ['id'];
+    protected $guarded = ['id','foto'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -42,4 +42,10 @@ class User extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'akun_pembelis';
 }
