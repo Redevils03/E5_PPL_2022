@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 class akun_pembeli extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
     protected $guarded = ['id_pembeli','foto'];
     protected $hidden = [
         'password',

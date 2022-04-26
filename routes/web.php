@@ -15,6 +15,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/edit', [RegisterController::class, 'edit']);
 
 Route::get('/produk', function () {
     $produk = DB::table('data_produks')->get();
@@ -22,7 +23,6 @@ Route::get('/produk', function () {
 });
 
 Route::get('/profil', function () {
-    // $profil = DB::table('akun_pembelis')->get();
     return view('profil');
 });
 

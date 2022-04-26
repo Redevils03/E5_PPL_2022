@@ -40,7 +40,7 @@
                     <form class="modal-body" action="/login" method="post">
                         @csrf
                         <div>
-                            <input name="email" id="email" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" required value="{{ old ('email') }}">
+                            <input name="email" id="email" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" value="{{ old ('email') }}">
                             @error('email')
                                 <div class="invalid-feeback">
                                     Mohon isikan email dengan format yang sesuai.
@@ -48,7 +48,7 @@
                             @enderror
                         </div>
                         <div>
-                            <input name="password" id="password" type="password" class="form-control mt-4" placeholder="Password" required>
+                            <input name="password" id="password" type="password" class="form-control mt-4" placeholder="Password">
                         </div>
                         {{-- <div class="mt-3">
                             <a href="#">Lupa Password?</a> <br>

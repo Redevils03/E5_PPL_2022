@@ -27,6 +27,7 @@
 <body style="overflow: hidden"> 
 @section('content')
     <div>
+        {{-- modal formulir --}}
         <div class="modal fade" id="RegisterShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content bg-custom text-white">
@@ -37,7 +38,7 @@
                     <form class="modal-body text-black" action="/register" method="post">
                         @csrf
                         <div>
-                            <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" value="{{ old ('email') }}">
+                            <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" value="{{ old ('email1') }}">
                             @error('email')
                                 <div class="invalid-feedback">
                                     Mohon isikan email dengan format yang sesuai.
@@ -82,6 +83,7 @@
             </div>
         </div>
 
+        {{-- background landing page --}}
         <div>
             <img class="blend1 icon1" src="img/kedelai.png">
             <img class="blend1 icon2" src="img/kedelai.png">
@@ -107,11 +109,15 @@
 
         <button class="btn btn-success btn-landing shadow-none"><b>Masuk / Daftar</b></button>  
     </div>
+
+    {{-- Selalu tampilkan modal pada halaman --}}
     <script type="text/javascript">
         window.onload = () => {
             $('#RegisterShow').modal('show');
         }
     </script>
+
+    {{-- Tetap tampilkan modal saat ada input error --}}
     @if (count($errors) > 0)
         <script type="text/javascript">
             $( document ).ready(function() {
