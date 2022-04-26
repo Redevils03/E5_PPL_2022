@@ -13,15 +13,14 @@
 <body>
 @section('content')
     <div>
-        {{-- Formulir modal tambah produk --}}
-        <div class="modal fade" id="tambahShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="editShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content bg-custom text-white">
                     <div class="modal-header border-0 text-center">
                         <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Tambah Produk</b></h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <a href="/produk"><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></a>
                     </div>
-                    <form class="modal-body text-black" action="/produk" method="post">
+                    <form class="modal-body text-black" action="/editproduk/{{ $id }}" method="post">
                         @csrf
                         <div>
                             <label style="color: white; font-weight: 600;">Upload Gambar</label>
@@ -33,14 +32,13 @@
                         </div>
                         <div class="border-0 d-flex mt-4">
                             <p class="me-auto"></p>
-                            <button type="submit" class="btn btn-success shadow-none"><b>Tambah</b></button>
+                            <button type="submit" class="btn btn-success shadow-none"><b>Edit</b></button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        {{-- Navbar atas --}}
         <div class="d-flex">
             <h4 class="me-auto kedelai1"><b>Kedelai Kamila</b></h4>
             <div class="rectangle1 d-flex">
@@ -50,20 +48,14 @@
                     <a href="#" class="aPadd" id="imageDropdown" data-bs-toggle="dropdown">
                         <img class="drop1" src="img/drop.png">
                     </a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Daftar Akun Pembeli</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
 
-        {{-- Tambah Produk --}}
         <h2 class="mt-5" style="text-align: center; color: white;">Katalog Produk</h2>
         @if (Auth::guard('admin')->check())
             <button type="button" class="btn btn-primary shadow-none" style="margin-left: 65px;" data-bs-toggle="modal" data-bs-target="#tambahShow"><i class="bi bi-plus"></i> Tambah Produk</button>
         @endif
-
-        {{-- Daftar Produk & Tombol Edit Hapus --}}
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <?php $produk = DB::table('data_produks')->get(); ?>
@@ -78,8 +70,8 @@
                                     Sisa Stok : {{ $data->jumlah_produk }}
                                 </p>
                                 @if (Auth::guard('admin')->check())
-                                    <a href="/editproduk/{{ $data->No_id }}"><button type="button" class="btn btn-success btn-sm shadow-none"><i class="bi bi-pencil-square"></i></button></a>
-                                    <a href="/produk/{{ $data->No_id }}"><button type="button" class="btn btn-danger btn-sm shadow-none"><i class="bi bi-trash3-fill"></i></button></a>
+                                    <button type="button" class="btn btn-success btn-sm shadow-none" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#editShow{{ $data->No_id }}"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" class="btn btn-danger btn-sm shadow-none"><i class="bi bi-trash3-fill"></i></button>
                                 @endif
                             </div>
                         </div>
@@ -88,5 +80,11 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        window.onload = () => {
+            $('#editShow').modal('show');
+        }
+    </script>
 @endsection
 </body>

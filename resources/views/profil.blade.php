@@ -40,10 +40,10 @@
         <div class="d-flex">
             <h4 class="me-auto kedelai1"><b>Kedelai Kamila</b></h4>
             <div class="rectangle1 d-flex">
-                <a href="" class="aPadd"><img class="home1" src="img/home.png"></a>
-                <a href="#" class="aVisit aPadd"><img class="home1" src="img/user.png"></a>
+                <a href="/produk" class="aPadd"><img class="home1" src="img/home.png"></a>
+                <a href="" class="aVisit aPadd"><img class="home1" src="img/user.png"></a>
                 <div class="dropdown">
-                    <a href="#" class="aPadd" id="imageDropdown" data-bs-toggle="dropdown">
+                    <a href="" class="aPadd" id="imageDropdown" data-bs-toggle="dropdown">
                         <img class="drop1" src="img/drop.png">
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown">
