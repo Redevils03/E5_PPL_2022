@@ -17,6 +17,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/edit', [RegisterController::class, 'edit']);
+Route::get('/akunpembeli/{id}', [RegisterController::class, 'data_pembeli']);
 
 Route::get('/produk',[ProdukController::class, 'index']);
 Route::get('/produk/{id}',[ProdukController::class, 'hapus']);
@@ -29,5 +30,5 @@ Route::get('/profil', function () {
 });
 
 Route::get('/daftarpembeli', function () {
-    return 'Halaman Daftar Akun Pembeli';
+    return view('daftarakunpembeli');
 });

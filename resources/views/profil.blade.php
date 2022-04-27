@@ -47,10 +47,7 @@
                         <img class="drop1" src="img/drop.png">
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 1</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 2</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 3</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Menu item 4</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembeli">Daftar Akun Pembeli</a></li>
                     </ul>
                 </div>
             </div>

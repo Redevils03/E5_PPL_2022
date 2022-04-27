@@ -16,6 +16,13 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function data_pembeli($id)
+    {
+        return view('akunpembeli', [
+            'id' => $id
+        ]);
+    }
+
     public function store(Request $request)
     {
         

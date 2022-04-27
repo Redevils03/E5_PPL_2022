@@ -23,11 +23,34 @@
 <body>
 @section('content')
     <div>
-        {{-- navbar atas --}}
+        <div class="modal fade" id="dataShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-custom text-white">
+                    <?php $produk = DB::table('akun_pembelis')->where('id', $id)->get(); ?>
+                    @foreach ($produk as $key => $data)
+                        <div class="modal-header border-0 text-center">
+                            <h5 class="modal-title w-100" id="staticBackdropLabel"><b>{{ $data->nama }}</b></h5>
+                            <a href="/daftarpembeli"><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                        </div>
+                        <div class="modal-body text-white">
+                            @csrf
+                            <h4>
+                                Nomor Telepon &emsp;: {{$data->nomor_telp}} <br><br>
+                                Email &emsp;&emsp;&emsp;&emsp;&emsp;&ensp;: {{$data->email}} <br><br>
+                                Alamat &emsp;&emsp;&emsp;&emsp;&ensp;: {{$data->alamat}} <br><br>
+                                Jenis Kelamin &emsp;&ensp;: {{$data->jenis_kelamin}} <br><br>
+                            </h4>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        navbar atas
         <div class="d-flex">
             <h4 class="me-auto kedelai1"><b>Kedelai Kamila</b></h4>
             <div class="rectangle1 d-flex">
-                <a href="/produk" class="aPadd"><img class="home1" src="img/home.png"></a>
+                <a href="" class="aPadd"><img class="home1" src="img/home.png"></a>
                 <a href="" class="aPadd"><img class="home1" src="img/user.png"></a>
                 <div class="dropdown">
                     <a href="" class="aPadd" id="imageDropdown" data-bs-toggle="dropdown">
@@ -62,9 +85,9 @@
                                     }
                                     @endphp
                                 </td>
-                                <td class="col-8"><a href="/akunpembeli/{{ $data->id }}"><h3 class="nama_pem">{{ $data->nama }}</h3></a></td>
+                                <td class="col-8"><h3 class="nama_pem">{{ $data->nama }}</h3></td>
                                 <td class="col-1">
-                                    <a href="" type="submit" name='chat' class="btn btn-success shadow-none nama_pem foto"><i class="bi bi-chat-left-dots-fill"></i></a>  
+                                    <button href="" type="submit" name='chat' class="btn btn-success shadow-none nama_pem foto"><i class="bi bi-chat-left-dots-fill"></i></button>  
                                 </td>
                             </tr>
                         </tbody>
@@ -73,5 +96,11 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        window.onload = () => {
+            $('#dataShow').modal('show');
+        }
+    </script>
 @endsection
 </body>

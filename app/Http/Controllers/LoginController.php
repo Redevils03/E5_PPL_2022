@@ -24,13 +24,12 @@ class LoginController extends Controller
         
         if(Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            // dd(Auth::guard('admin')->user());
-            return redirect()->intended('/profil');
+            return redirect()->intended('/produk');
         }
 
         if(Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/profil');
+            return redirect()->intended('/produk');
         }
 
         return back()->with('loginError', 'email atau password salah!');
