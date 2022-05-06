@@ -46,15 +46,15 @@
             </div>
         </div>
 
-        navbar atas
+        {{-- navbar atas --}}
         <div class="d-flex">
             <h4 class="me-auto kedelai1"><b>Kedelai Kamila</b></h4>
             <div class="rectangle1 d-flex">
-                <a href="" class="aPadd"><img class="home1" src="img/home.png"></a>
-                <a href="" class="aPadd"><img class="home1" src="img/user.png"></a>
+                <a href="" class="aPadd"><img class="home1" src="<?= asset('img/home.png') ?>"></a>
+                <a href="" class="aPadd"><img class="home1" src="<?= asset('img/user.png') ?>"></a>
                 <div class="dropdown">
                     <a href="" class="aPadd" id="imageDropdown" data-bs-toggle="dropdown">
-                        <img class="drop1" src="img/drop.png">
+                        <img class="drop1" src="<?= asset('img/drop.png') ?>">
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="">Daftar Akun Pembeli</a></li>
@@ -74,20 +74,21 @@
                                 <td class="col-2">
                                     @php
                                     if (empty($data->gambar)) {
+                                        $foto = asset('img/foto_null.png');
                                         echo "
-                                        <img src='img/foto_null.png' class='rounded-circle foto'>
+                                        <img class='rounded-circle foto' src={$foto}>
                                         ";
                                     } else {
                                         $foto = 'data:image/jpeg;base64,' . base64_encode($data->gambar);
                                         echo "
-                                        <img src={$foto} class='rounded-circle'>
+                                        <img class='rounded-circle'src={$foto}>
                                         ";
                                     }
                                     @endphp
                                 </td>
                                 <td class="col-8"><h3 class="nama_pem">{{ $data->nama }}</h3></td>
                                 <td class="col-1">
-                                    <button href="" type="submit" name='chat' class="btn btn-success shadow-none nama_pem foto"><i class="bi bi-chat-left-dots-fill"></i></button>  
+                                    <a href="" type="submit" name='chat' class="btn btn-success shadow-none nama_pem foto"><i class="bi bi-chat-left-dots-fill" style="color: black"></i></a>  
                                 </td>
                             </tr>
                         </tbody>

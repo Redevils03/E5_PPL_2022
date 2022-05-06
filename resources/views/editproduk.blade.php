@@ -20,7 +20,7 @@
                         <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Tambah Produk</b></h5>
                         <a href="/produk"><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></a>
                     </div>
-                    <form class="modal-body text-black" action="/editproduk/{{ $id }}" method="post">
+                    <form class="modal-body text-black" action="/editproduk/{{ $id }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div>
                             <label style="color: white; font-weight: 600;">Upload Gambar</label>
@@ -42,11 +42,11 @@
         <div class="d-flex">
             <h4 class="me-auto kedelai1"><b>Kedelai Kamila</b></h4>
             <div class="rectangle1 d-flex">
-                <a href="" class="aVisit aPadd"><img class="home1" src="img/home.png"></a>
-                <a href="/profil" class="aPadd"><img class="home1" src="img/user.png"></a>
+                <a href="" class="aVisit aPadd"><img class="home1" src="<?= asset('img/home.png') ?>"></a>
+                <a href="/profil" class="aPadd"><img class="home1" src="<?= asset('img/user.png') ?>"></a>
                 <div class="dropdown">
                     <a href="#" class="aPadd" id="imageDropdown" data-bs-toggle="dropdown">
-                        <img class="drop1" src="img/drop.png">
+                        <img class="drop1" src="<?= asset('img/drop.png') ?>">
                     </a>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 @foreach ($produk as $key => $data)
                     <div class='col-12 col-md-5 col-lg-4 col-xxl-3'>
                         <div class='card mb-4' style='width: 100%;'>
-                            <img class='card-img-top' src="data:image/jpg;base64,{{ chunk_split(base64_encode($data->gambar)) }}">
+                            <img class='card-img-top' src="{{ asset('storage/' . $data->gambar) }}">
                             <div class='card-body'>
                                 <h5 class='card-title text-center'>{{ $data->nama_produk }}</h5>
                                 <p class='card-text text-justify'> 

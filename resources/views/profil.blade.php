@@ -47,7 +47,12 @@
                         <img class="drop1" src="img/drop.png">
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembeli">Daftar Akun Pembeli</a></li>
+                        @if (Auth::guard('admin')->check())
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembeli">Daftar Akun Pembeli</a></li>
+                        @elseif (Auth::guard('web')->check())
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Chat Admin</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Daftar Pembelian</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>

@@ -21,7 +21,7 @@
                         <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Tambah Produk</b></h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form class="modal-body text-black" action="/produk" method="post">
+                    <form class="modal-body text-black" action="/produk" method="post" enctype="multipart/form-data">
                         @csrf
                         <div>
                             <label style="color: white; font-weight: 600;">Upload Gambar</label>
@@ -70,7 +70,7 @@
                 @foreach ($produk as $key => $data)
                     <div class='col-12 col-md-5 col-lg-4 col-xxl-3'>
                         <div class='card mb-4' style='width: 100%;'>
-                            <img class='card-img-top' src="data:image/jpg;base64,{{ chunk_split(base64_encode($data->gambar)) }}">
+                            <img class='card-img-top' src="{{ asset('storage/' . $data->gambar) }}">
                             <div class='card-body'>
                                 <h5 class='card-title text-center'>{{ $data->nama_produk }}</h5>
                                 <p class='card-text text-justify'> 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('email',30);
             $table->string('password');
-            $table->binary('foto')->nullable();
+            $table->string('foto')->nullable();
             $table->string('nama',30);
             $table->string('nomor_telp',14);
             $table->string('jenis_kelamin',10);

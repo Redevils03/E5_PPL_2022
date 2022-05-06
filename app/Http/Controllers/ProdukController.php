@@ -21,15 +21,19 @@ class ProdukController extends Controller
 
     public function tambah(Request $request)
     {
-        
+        // return $request->file('gambar')->store('post-image');
         $validateData = $request->validate([
-            'gambar' => 'required',
+            'gambar' => 'required|image|file',
             'nama_produk' => 'required',
             'jumlah_produk' => 'required',
             'harga_produk' => 'required',
             'harga_asli' => 'required'
         ]);
         
+        if($request->file('gambar')) {
+            $validateData['gambar'] = $request->file('gambar')->store('post-image');
+        }
+
         data_produk::create($validateData);
         
         // $request->session()->flash('success', 'Akun berhasil dibuat, silahkan login');
@@ -43,15 +47,20 @@ class ProdukController extends Controller
     }
 
     public function edit(Request $request, $id)
-    {     
+    {   
+        // ddd($request);  
         $validateData = $request->validate([
-            'gambar' => 'required',
+            'gambar' => 'required|image|file',
             'nama_produk' => 'required',
             'jumlah_produk' => 'required',
             'harga_produk' => 'required',
             'harga_asli' => 'required'
         ]);
-            
+        
+        if($request->file('gambar')) {
+            $validateData['gambar'] = $request->file('gambar')->store('post-image');
+        }
+
         data_produk::where('No_id',$id)->update($validateData);
 
         return redirect(('/produk'));
