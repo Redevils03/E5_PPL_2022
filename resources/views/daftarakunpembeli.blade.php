@@ -64,7 +64,7 @@
                                 </td>
                                 <td class="col-8"><a href="/akunpembeli/{{ $data->id }}"><h3 class="nama_pem">{{ $data->nama }}</h3></a></td>
                                 <td class="col-1">
-                                    <a href="" type="submit" name='chat' class="btn btn-success shadow-none nama_pem foto"><i class="bi bi-chat-left-dots-fill"></i></a>  
+                                    <a href="/chat/{{ $data->id }}" type="submit" name='chat' class="btn btn-success shadow-none nama_pem foto"><i class="bi bi-chat-left-dots-fill"></i></a>  
                                 </td>
                             </tr>
                         </tbody>
