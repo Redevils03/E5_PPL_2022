@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\chat_message;
 use App\Models\akun_admin;
 use App\Models\akun_pembeli;
 use Illuminate\Http\Request;
@@ -19,6 +20,13 @@ class RegisterController extends Controller
     public function data_pembeli($id)
     {
         return view('akunpembeli', [
+            'id' => $id
+        ]);
+    }
+
+    public function index_chat($id)
+    {
+        return view('chat', [
             'id' => $id
         ]);
     }
@@ -73,5 +81,27 @@ class RegisterController extends Controller
         // $request->session()->flash('success', 'Akun berhasil dibuat, silahkan login');
 
         return redirect(('/profil'));
+    }
+
+    public function chat(Request $request, $id)
+    {
+        if (Auth::guard('admin')->check()) {
+
+            $validateData = $request->validate([
+                'message' => 'min:1|max:255',
+            ]);
+        
+            chat_message::create(array_merge(['id_pembeli'=>$id], ['role'=>'admin'], $validateData));
+        }
+        else if (Auth::guard('web')->check()) {
+
+            $validateData = $request->validate([
+                'message' => 'min:1|max:255',
+            ]);
+
+            chat_message::create(array_merge(['id_pembeli'=>Auth::id()], ['role'=>'pembeli'], $validateData));
+        }
+
+        return redirect()->back();
     }
 }
