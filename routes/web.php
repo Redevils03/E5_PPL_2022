@@ -23,9 +23,10 @@ Route::post('/chat/{id}', [RegisterController::class, 'chat']);
 
 Route::get('/produk',[ProdukController::class, 'index']);
 Route::get('/produk/{id}',[ProdukController::class, 'hapus']);
-Route::get('/editproduk/{id}',[ProdukController::class, 'index_edit']);
 Route::post('/editproduk/{id}',[ProdukController::class, 'edit']);
 Route::post('/produk',[ProdukController::class, 'tambah']);
+Route::get('/beliproduk/{id}',[ProdukController::class, 'index_beli']);
+Route::post('/beliproduk/{id}',[ProdukController::class, 'beli']);
 
 Route::get('/profil', function () {
     return view('profil');
@@ -33,4 +34,8 @@ Route::get('/profil', function () {
 
 Route::get('/daftarpembeli', function () {
     return view('daftarakunpembeli');
+});
+
+Route::get('/daftarpembelian', function () {
+    return view('daftarpembelian');
 });
