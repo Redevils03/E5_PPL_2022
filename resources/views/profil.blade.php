@@ -19,7 +19,7 @@
         font-weight: 600;
     }
 
-    select:required:invalid {
+    select[invalid=""] {
         font-weight: 600;
         color: rgb(104, 104, 104);
     }
@@ -30,12 +30,32 @@
         font-weight: 100;
         color: black;
     }
+
+    .alert {
+        z-index: 2000;
+    }
 </style>
 @endsection
 
 <body>
 @section('content')
     <div>
+        {{-- Tetap tampilkan modal saat ada input error --}}
+        @if (count($errors) > 0)
+            @if (session()->has('Empty')) 
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('Empty') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            <script type="text/javascript">
+                $( document ).ready(function() {
+                    $('#editShow').modal('show');
+                });
+            </script>
+        @endif
+
         {{-- navbar atas --}}
         <div class="d-flex">
             <h4 class="me-auto kedelai1"><b>Kedelai Kamila</b></h4>
@@ -58,7 +78,6 @@
             </div>
         </div>
 
-
         {{-- Tampilan profil --}}
         @if (Auth::guard('admin')->check())
             <img src='img/foto_null.png' class='rounded-circle fotoProfil'>
@@ -70,18 +89,11 @@
                 </h6>
             </div>
         @elseif (Auth::guard('web')->check())
-            @php
-            if (empty(Auth::user()->foto)) {
-                echo "
+            @if (empty(Auth::user()->foto))
                 <img src='img/foto_null.png' class='rounded-circle fotoProfil'>
-                ";
-            } else {
-                $foto = 'data:image/jpeg;base64,' . base64_encode(Auth::user()->foto);
-                echo "
-                <img src={$foto} class='rounded-circle fotoProfil'>
-                ";
-            }
-            @endphp
+            @else
+                <img src="{{ asset('storage/' . Auth::user()->gambar) }}" class='rounded-circle fotoProfil'>
+            @endif
             <div class="profil1">
                 <br> <h3 class="namapem"> {{Auth::user()->nama}}</h3> <br>
                 <h6 class="identitas">
@@ -99,14 +111,14 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content bg-custom text-white">
                     <div class="modal-header border-0 text-center">
-                        <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Edit</b></h5>
+                        <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Edit Data Profil</b></h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form class="modal-body text-black" action="/edit" method="post">
+                    <form class="modal-body text-black" action="/edit" method="post" enctype="multipart/form-data">
                         @csrf
                         @if (Auth::guard('admin')->check())
                             <div>
-                                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" value="{{ old ('email') }}">
+                                <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" value="{{ old('email') }}">
                                 @error('email')
                                     <div class="invalid-feedback">
                                         Mohon isikan email dengan format yang sesuai.
@@ -115,16 +127,18 @@
                                 <input name="password" id="password" type="password" class="form-control mt-4 @error('password') is-invalid @enderror" placeholder="Password">
                                 @error('password')
                                     <div class="invalid-feedback">
-                                        Mohon isikan password dengan minimal 6 karakter.
+                                        Mohon isikan password dengan minimal 6 karakter dan maksimal 15 karakter.
                                     </div>
                                 @enderror
                             </div>
                             <div class="border-0 d-flex mt-4">
                                 <p class="me-auto"></p>
-                                <button type="submit" class="btn btn-success shadow-none"><b>Ubah</b></button>
+                                <button type="submit" class="btn btn-success shadow-none"><b>Edit</b></button>
                             </div>
                         @elseif (Auth::guard('web')->check())
                             <div>
+                                <label style="color: white; font-weight: 600;">Upload Gambar</label>
+                                <input  name='gambar' class="form-control" type="file" placeholder="Foto Profil" required>
                                 <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" value="{{ old ('email') }}">
                                 @error('email')
                                     <div class="invalid-feedback">
@@ -134,7 +148,7 @@
                                 <input name="password" id="password" type="password" class="form-control mt-4 @error('password') is-invalid @enderror" placeholder="Password">
                                 @error('password')
                                     <div class="invalid-feedback">
-                                        Mohon isikan password dengan minimal 6 karakter.
+                                        Mohon isikan password dengan minimal 6 karakter dan maksimal 15 karakter.
                                     </div>
                                 @enderror
                                 <input name="nama" id="nama" type="text" class="form-control mt-4 @error('nama') is-invalid @enderror" placeholder="Masukkan nama" value="{{ old ('nama') }}">
@@ -146,7 +160,7 @@
                                 <input name="nomor_telp" id="nomor_telp" type="number" class="form-control mt-4 @error('nomor_telp') is-invalid @enderror" placeholder="Masukkan nomor telepon" value="{{ old ('nomor_telp') }}">
                                 @error('nomor_telp')
                                     <div class="invalid-feedback">
-                                        Mohon isikan nomor telepon yang aktif.
+                                        Mohon isikan nomor telepon yang valid.
                                     </div>
                                 @enderror
                                 <input name="alamat" id="alamat" type="text" class="form-control mt-4 @error('alamat') is-invalid @enderror" placeholder="Masukkan alamat" value="{{ old ('alamat') }}">
@@ -155,11 +169,16 @@
                                         Mohon isikan alamat tempat tinggal saat ini.
                                     </div>
                                 @enderror
-                                <select name="jenis_kelamin" id="jenis_kelamin" class="form-select mt-4 @error('jenis_kelamin') is-invalid @enderror" required>
+                                <select name="jenis_kelamin" id="jenis_kelamin" class="form-select mt-4 @error('jenis_kelamin') is-invalid @enderror">
                                     <option value="" disabled selected hidden>Jenis Kelamin</option>
                                     <option value="laki-laki">Laki-Laki</option>
                                     <option value="perempuan">Perempuan</option>
                                 </select>
+                                @error('jenis_kelamin')
+                                    <div class="invalid-feedback">
+                                        Mohon pilih jenis kelamin yang sesuai.
+                                    </div>
+                                @enderror
                             </div>
                             <div class="border-0 d-flex mt-4">
                                 <p class="me-auto"></p>
@@ -182,14 +201,5 @@
             </form>
         </div>
     </div>
-
-    {{-- Tetap tampilkan modal saat ada input error --}}
-    @if (count($errors) > 0)
-        <script type="text/javascript">
-            $( document ).ready(function() {
-                $('#editShow').modal('show');
-            });
-        </script>
-    @endif
 @endsection
 </body>

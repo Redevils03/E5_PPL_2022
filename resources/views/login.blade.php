@@ -7,7 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <style>
-    .alert{
+    .alert {
         z-index: 2000;
     }
 </style>
@@ -16,6 +16,13 @@
 <body style="overflow: hidden"> 
 @section('content')
     <div>
+        @if (session()->has('Empty')) 
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('Empty') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -40,12 +47,7 @@
                     <form class="modal-body" action="/login" method="post">
                         @csrf
                         <div>
-                            <input name="email" id="email" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" value="{{ old ('email') }}">
-                            @error('email')
-                                <div class="invalid-feeback">
-                                    Mohon isikan email dengan format yang sesuai.
-                                </div>
-                            @enderror
+                            <input name="email" id="email" type="text" class="form-control" placeholder="Masukkan Email" value="{{ old ('email') }}">
                         </div>
                         <div>
                             <input name="password" id="password" type="password" class="form-control mt-4" placeholder="Password">

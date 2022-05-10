@@ -33,7 +33,6 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-        
         $validateData = $request->validate([
             'email' => 'required|email:rfc,dns',
             'password' => 'required|min:6|max:15',
@@ -46,15 +45,19 @@ class RegisterController extends Controller
         $validateData['password'] = bcrypt($validateData['password']);
         
         akun_pembeli::create($validateData);
-        
-        $request->session()->flash('success', 'Akun berhasil dibuat, silahkan login');
 
-        return redirect(('/login'));
+        return redirect('/login');
     }
 
     public function edit(Request $request)
-    {     
+    {   
         if (Auth::guard('admin')->check()) {
+
+            if ($request->email == null || $request->password == null) {
+                session()->flash('Empty', 'Silahkan Isi Semua Data');
+                return redirect()->back()->withErrors(['Empty', 'Silahkan Isi Semua Data'])->withInput();
+            }
+
             $validateData = $request->validate([
                 'email' => 'required|email:rfc,dns',
                 'password' => 'required|min:6|max:15',
@@ -65,7 +68,14 @@ class RegisterController extends Controller
             akun_admin::where('id',Auth::guard('admin')->id())->update($validateData);
         }
         else if (Auth::guard('web')->check()) {
+
+            if ($request->gambar == null || $request->email == null || $request->password == null || $request->nama == null || $request->nomor_telp == null || $request->alamat == null || $request->jenis_kelamin == null) {
+                session()->flash('Empty', 'Silahkan Isi Semua Data');
+                return redirect()->back()->withErrors(['Empty', 'Silahkan Isi Semua Data'])->withInput();
+            }
+
             $validateData = $request->validate([
+                'gambar' => 'required|image|file',
                 'email' => 'required|email:rfc,dns',
                 'password' => 'required|min:6|max:15',
                 'nama' => 'required|max:30',
@@ -73,12 +83,15 @@ class RegisterController extends Controller
                 'alamat' => 'required',
                 'jenis_kelamin' => 'required|in:laki-laki,perempuan'
             ]);
+
+            if($request->file('gambar')) {
+                $validateData['gambar'] = $request->file('gambar')->store('post-image');
+            }
             
             $validateData['password'] = bcrypt($validateData['password']);
             
             akun_pembeli::where('id',Auth::id())->update($validateData);
         }
-        // $request->session()->flash('success', 'Akun berhasil dibuat, silahkan login');
 
         return redirect(('/profil'));
     }

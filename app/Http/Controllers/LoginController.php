@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+// C_Login
 class LoginController extends Controller
 {
     public function index()
@@ -16,8 +17,13 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
+        if ($request->email == null || $request->password == null) {
+            session()->flash('Empty', 'Silahkan Isi Semua Data');
+            return redirect()->back();
+        }
+
         $credentials = $request->validate([
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required',
             'password' => 'required'
         ]);
         
@@ -31,7 +37,8 @@ class LoginController extends Controller
             return redirect()->intended('/produk');
         }
 
-        return back()->with('loginError', 'email atau password salah!');
+        session()->flash('loginError', 'Email atau Password Salah');
+        return redirect()->back();
     }
 
     public function logout() 

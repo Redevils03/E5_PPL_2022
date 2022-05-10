@@ -8,28 +8,51 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<style>
+    .alert {
+        z-index: 2000;
+    }
+</style>
 @endsection
 
-<body>
+<body style="overflow-x: hidden">
 @section('content')
     <div>
+        {{-- Memunculkan pesan error --}}
+        @if (count($errors) > 0)
+            @if (session()->has('Empty')) 
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('Empty') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            <script type="text/javascript">
+                $( document ).ready(function() {
+                    $('#tambahShow').modal('show');
+                });
+            </script>
+
+            @php session()->forget('Empty') @endphp
+        @endif
+
         {{-- Formulir modal tambah produk --}}
         <div class="modal fade" id="tambahShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content bg-custom text-white">
                     <div class="modal-header border-0 text-center">
                         <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Tambah Produk</b></h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <a href="/produk"><button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal" aria-label="Close"></button></a>
                     </div>
                     <form class="modal-body text-black" action="/produk" method="post" enctype="multipart/form-data">
                         @csrf
                         <div>
                             <label style="color: white; font-weight: 600;">Upload Gambar</label>
-                            <input  name='gambar' class="form-control" type="file" placeholder="Gambar Produk" required>
-                            <input type="text" name="nama_produk" id="nama" class="mt-4 form-control" placeholder="Masukkan Nama Produk">
-                            <input name="jumlah_produk" id="jumlah" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Produk">
-                            <input name="harga_produk" id="harga" type="number" class="form-control mt-4" placeholder="Masukkan Harga Produk">
-                            <input name="harga_asli" id="harga_asli" type="number" class="form-control mt-4" placeholder="Masukkan Harga Asli Produk">
+                            <input  name='gambar' class="form-control" type="file" placeholder="Gambar Produk" value="{{ old ('gambar') }}">
+                            <input type="text" name="nama_produk" id="nama" class="mt-4 form-control" placeholder="Masukkan Nama Produk" value="{{ old ('nama_produk') }}">
+                            <input name="jumlah_produk" id="jumlah" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Produk" value="{{ old ('jumlah_produk') }}">
+                            <input name="harga_produk" id="harga" type="number" class="form-control mt-4" placeholder="Masukkan Harga Produk" value="{{ old ('harga_produk') }}">
+                            <input name="harga_asli" id="harga_asli" type="number" class="form-control mt-4" placeholder="Masukkan Harga Asli Produk" value="{{ old ('harga_asli') }}">
                         </div>
                         <div class="border-0 d-flex mt-4">
                             <p class="me-auto"></p>
@@ -55,7 +78,7 @@
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembeli">Daftar Akun Pembeli</a></li>
                         @elseif (Auth::guard('web')->check())
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="/chat/{{ Auth::id() }}">Chat Admin</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Daftar Pembelian</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembelian">Daftar Pembelian</a></li>
                         @endif
                     </ul>
                 </div>
@@ -68,7 +91,7 @@
             <button type="button" class="btn btn-primary shadow-none" style="margin-left: 65px;" data-bs-toggle="modal" data-bs-target="#tambahShow"><i class="bi bi-plus"></i> Tambah Produk</button>
         @endif
 
-        {{-- Daftar Produk & Tombol Edit Hapus --}}
+        {{-- Daftar Produk & Edit Hapus --}}
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <?php $produk = DB::table('data_produks')->get(); ?>
@@ -83,8 +106,52 @@
                                     Sisa Stok : {{ $data->jumlah_produk }}
                                 </p>
                                 @if (Auth::guard('admin')->check())
-                                    <a href="/editproduk/{{ $data->id }}"><button type="button" class="btn btn-success btn-sm shadow-none"><i class="bi bi-pencil-square"></i></button></a>
-                                    <a href="/produk/{{ $data->id }}"><button type="button" class="btn btn-danger btn-sm shadow-none"><i class="bi bi-trash3-fill"></i></button></a>
+
+                                    {{-- Konfirmasi Hapus --}}
+                                    <div class="modal fade" id="konfirShow{{ $data->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content bg-custom text-white">
+                                                <div class="modal-header border-0 text-center">
+                                                    <h5 class="modal-title w-100" id="staticBackdropLabel">Hapus Produk?</h5>
+                                                    <a href="/produk/{{ $data->id }}"><button type="button" class="btn btn-success shadow-none" style="margin-right: 15px;"><b>Iya</b></button></a>
+                                                    <a href="/produk"><button type="button" class="btn btn-danger shadow-none" ><b>Tidak</b></button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {{-- Formulir Edit --}}
+                                    <div class="modal fade" id="editShow{{ $data->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content bg-custom text-white">
+                                                <div class="modal-header border-0 text-center">
+                                                    <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Edit Produk</b></h5>
+                                                    <a href="/produk"><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                                                </div>
+                                                <form class="modal-body text-black" action="/editproduk/{{ $data->id }}" method="post" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div>
+                                                        <label style="color: white; font-weight: 600;">Upload Gambar</label>
+                                                        <input  name='gambar' class="form-control" type="file" placeholder="Gambar Produk">
+                                                        <input type="text" name="nama_produk" id="nama" class="mt-4 form-control" placeholder="Masukkan Nama Produk">
+                                                        <input name="jumlah_produk" id="jumlah" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Produk">
+                                                        <input name="harga_produk" id="harga" type="number" class="form-control mt-4" placeholder="Masukkan Harga Produk">
+                                                        <input name="harga_asli" id="harga_asli" type="number" class="form-control mt-4" placeholder="Masukkan Harga Asli Produk">
+                                                    </div>
+                                                    <div class="border-0 d-flex mt-4">
+                                                        <p class="me-auto"></p>
+                                                        <button type="submit" class="btn btn-success shadow-none"><b>Edit</b></button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a><button type="button" class="btn btn-success btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#editShow{{ $data->id }}"><i class="bi bi-pencil-square"></i></button></a>
+                                    <a><button type="button" class="btn btn-danger btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#konfirShow{{ $data->id }}"><i class="bi bi-trash3-fill"></i></button></a>
+                                    
+                                @elseif (Auth::guard('web')->check())
+                                    <a href="/beliproduk/{{ $data->id }}"><button type="submit" class="btn btn-success btn-sm shadow-none">Beli</button></a>
                                 @endif
                             </div>
                         </div>

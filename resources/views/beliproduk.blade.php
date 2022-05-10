@@ -17,22 +17,15 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content bg-custom text-white">
                     <div class="modal-header border-0 text-center">
-                        <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Tambah Produk</b></h5>
+                        <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Beli Produk</b></h5>
                         <a href="/produk"><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></a>
                     </div>
-                    <form class="modal-body text-black" action="/editproduk/{{ $id }}" method="post" enctype="multipart/form-data">
+                    <form class="modal-body text-black" action="/beliproduk/{{ $id }}" method="post">
                         @csrf
-                        <div>
-                            <label style="color: white; font-weight: 600;">Upload Gambar</label>
-                            <input  name='gambar' class="form-control" type="file" placeholder="Gambar Produk" required>
-                            <input type="text" name="nama_produk" id="nama" class="mt-4 form-control" placeholder="Masukkan Nama Produk">
-                            <input name="jumlah_produk" id="jumlah" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Produk">
-                            <input name="harga_produk" id="harga" type="number" class="form-control mt-4" placeholder="Masukkan Harga Produk">
-                            <input name="harga_asli" id="harga_asli" type="number" class="form-control mt-4" placeholder="Masukkan Harga Asli Produk">
-                        </div>
+                        <input name="jumlah_produk" id="jumlah" type="number" class="form-control" value="1">
                         <div class="border-0 d-flex mt-4">
                             <p class="me-auto"></p>
-                            <button type="submit" class="btn btn-success shadow-none"><b>Edit</b></button>
+                            <button type="submit" class="btn btn-success shadow-none"><b>Beli</b></button>
                         </div>
                     </form>
                 </div>
@@ -72,6 +65,8 @@
                                 @if (Auth::guard('admin')->check())
                                     <button type="button" class="btn btn-success btn-sm shadow-none" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#editShow{{ $data->No_id }}"><i class="bi bi-pencil-square"></i></button>
                                     <button type="button" class="btn btn-danger btn-sm shadow-none"><i class="bi bi-trash3-fill"></i></button>
+                                @elseif (Auth::guard('web')->check())
+                                    <a href="/beliproduk/{{ $data->id }}"><button type="submit" class="btn btn-success btn-sm shadow-none">Beli</button></a>
                                 @endif
                             </div>
                         </div>
