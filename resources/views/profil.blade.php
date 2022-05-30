@@ -70,10 +70,26 @@
                         @if (Auth::guard('admin')->check())
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembeli">Daftar Akun Pembeli</a></li>
                         @elseif (Auth::guard('web')->check())
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Chat Admin</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Daftar Pembelian</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/chat/{{ Auth::id() }}">Chat Admin</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembelian">Daftar Pembelian</a></li>
                         @endif
                     </ul>
+                </div>
+            </div>
+        </div>
+
+        {{-- Konfirmasi Logout --}}
+        <div class="modal fade" id="logoutShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-custom text-white">
+                    <form action="/logout" method="post">
+                        @csrf
+                        <div class="mt-3 modal-header border-0 text-center">
+                            <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Keluar Akun?</b></h5>
+                            <a><button type="submit" class="btn btn-success shadow-none" style="margin-right: 15px;"><b>Iya</b></button></a>
+                            <a href="/profil"><button type="button" class="btn btn-danger shadow-none"><b>Tidak</b></button></a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -92,7 +108,7 @@
             @if (empty(Auth::user()->foto))
                 <img src='img/foto_null.png' class='rounded-circle fotoProfil'>
             @else
-                <img src="{{ asset('storage/' . Auth::user()->gambar) }}" class='rounded-circle fotoProfil'>
+                <img src="{{ asset('storage/' . Auth::user()->foto) }}" class='rounded-circle fotoProfil'>
             @endif
             <div class="profil1">
                 <br> <h3 class="namapem"> {{Auth::user()->nama}}</h3> <br>
@@ -138,8 +154,8 @@
                         @elseif (Auth::guard('web')->check())
                             <div>
                                 <label style="color: white; font-weight: 600;">Upload Gambar</label>
-                                <input  name='gambar' class="form-control" type="file" placeholder="Foto Profil" required>
-                                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" value="{{ old ('email') }}">
+                                <input  name='foto' class="form-control" type="file" placeholder="Foto Profil">
+                                <input type="email" name="email" id="email" class="mt-4 form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" value="{{ old ('email') }}">
                                 @error('email')
                                     <div class="invalid-feedback">
                                         Mohon isikan email dengan format yang sesuai.
@@ -169,7 +185,7 @@
                                         Mohon isikan alamat tempat tinggal saat ini.
                                     </div>
                                 @enderror
-                                <select name="jenis_kelamin" id="jenis_kelamin" class="form-select mt-4 @error('jenis_kelamin') is-invalid @enderror">
+                                <select name="jenis_kelamin" id="jenis_kelamin" class="form-select mt-4 @error('jenis_kelamin') is-invalid @enderror" value="{{ old ('jenis_kelamin') }}" invalid="">
                                     <option value="" disabled selected hidden>Jenis Kelamin</option>
                                     <option value="laki-laki">Laki-Laki</option>
                                     <option value="perempuan">Perempuan</option>
@@ -195,10 +211,7 @@
             <div>
                 <button type="submit" class="btn btn-success shadow-none" data-bs-toggle="modal" data-bs-target="#editShow" style="margin-right: 30px;"> Edit </button>
             </div>
-            <form action="/logout" method="post">
-                @csrf
-                <button type="submit" class="btn btn-danger shadow-none"> Logout </button>
-            </form>
+            <button type="submit" class="btn btn-danger shadow-none" data-bs-toggle="modal" data-bs-target="#logoutShow"> Logout </button>
         </div>
     </div>
 @endsection

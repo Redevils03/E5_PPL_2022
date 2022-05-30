@@ -33,6 +33,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        
         $validateData = $request->validate([
             'email' => 'required|email:rfc,dns',
             'password' => 'required|min:6|max:15',
@@ -69,13 +70,13 @@ class RegisterController extends Controller
         }
         else if (Auth::guard('web')->check()) {
 
-            if ($request->gambar == null || $request->email == null || $request->password == null || $request->nama == null || $request->nomor_telp == null || $request->alamat == null || $request->jenis_kelamin == null) {
+            if ($request->foto == null || $request->email == null || $request->password == null || $request->nama == null || $request->nomor_telp == null || $request->alamat == null || $request->jenis_kelamin == null) {
                 session()->flash('Empty', 'Silahkan Isi Semua Data');
                 return redirect()->back()->withErrors(['Empty', 'Silahkan Isi Semua Data'])->withInput();
             }
 
             $validateData = $request->validate([
-                'gambar' => 'required|image|file',
+                'foto' => 'required|image|file',
                 'email' => 'required|email:rfc,dns',
                 'password' => 'required|min:6|max:15',
                 'nama' => 'required|max:30',
@@ -84,8 +85,8 @@ class RegisterController extends Controller
                 'jenis_kelamin' => 'required|in:laki-laki,perempuan'
             ]);
 
-            if($request->file('gambar')) {
-                $validateData['gambar'] = $request->file('gambar')->store('post-image');
+            if($request->file('foto')) {
+                $validateData['foto'] = $request->file('foto')->store('post-image');
             }
             
             $validateData['password'] = bcrypt($validateData['password']);

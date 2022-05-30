@@ -18,24 +18,46 @@
 <body style="overflow-x: hidden">
 @section('content')
     <div>
-        {{-- Memunculkan pesan error --}}
+        {{-- Memunculkan pesan error dan re-open modal --}}
         @if (count($errors) > 0)
             @if (session()->has('Empty')) 
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     {{ session('Empty') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+                <script type="text/javascript">
+                    $( document ).ready(function() {
+                        $('#tambahShow').modal('show');
+                    });
+                </script>
             @endif
 
-            <script type="text/javascript">
-                $( document ).ready(function() {
-                    $('#tambahShow').modal('show');
-                });
-            </script>
+            @if (session()->has('editEmpty')) 
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('editEmpty') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $("#tombol_edit").click(); 
+                    });
+                </script>
+            @endif
+
+            @if (session()->has('beliEmpty')) 
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('beliEmpty') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $("#tombol_beli").click(); 
+                    });
+                </script>
+            @endif
 
             @php session()->forget('Empty') @endphp
         @endif
-
         {{-- Formulir modal tambah produk --}}
         <div class="modal fade" id="tambahShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -76,6 +98,7 @@
                     <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown">
                         @if (Auth::guard('admin')->check())
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembeli">Daftar Akun Pembeli</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembelian">Daftar Pembelian</a></li>
                         @elseif (Auth::guard('web')->check())
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="/chat/{{ Auth::id() }}">Chat Admin</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembelian">Daftar Pembelian</a></li>
@@ -147,11 +170,32 @@
                                         </div>
                                     </div>
 
-                                    <a><button type="button" class="btn btn-success btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#editShow{{ $data->id }}"><i class="bi bi-pencil-square"></i></button></a>
+                                    <a><button type="button" id="tombol_edit" class="btn btn-success btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#editShow{{ $data->id }}"><i class="bi bi-pencil-square"></i></button></a>
+                                    
                                     <a><button type="button" class="btn btn-danger btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#konfirShow{{ $data->id }}"><i class="bi bi-trash3-fill"></i></button></a>
                                     
                                 @elseif (Auth::guard('web')->check())
-                                    <a href="/beliproduk/{{ $data->id }}"><button type="submit" class="btn btn-success btn-sm shadow-none">Beli</button></a>
+                                    {{-- Formulir Beli --}}
+                                    <div class="modal fade" id="beliShow{{ $data->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content bg-custom text-white">
+                                                <div class="modal-header border-0 text-center">
+                                                    <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Beli Produk</b></h5>
+                                                    <a href="/produk"><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                                                </div>
+                                                <form class="modal-body text-black" action="/beliproduk/{{ $data->id }}" method="post">
+                                                    @csrf
+                                                    <input name="jumlah_produk" id="jumlah" type="number" class="form-control" value="1">
+                                                    <div class="border-0 d-flex mt-4">
+                                                        <p class="me-auto"></p>
+                                                        <button type="submit" class="btn btn-success shadow-none"><b>Beli</b></button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a><button type="submit" id="tombol_beli" class="btn btn-success btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#beliShow{{ $data->id }}">Beli</button></a>
                                 @endif
                             </div>
                         </div>

@@ -25,7 +25,6 @@ Route::get('/produk',[ProdukController::class, 'index']);
 Route::get('/produk/{id}',[ProdukController::class, 'hapus']);
 Route::post('/editproduk/{id}',[ProdukController::class, 'edit']);
 Route::post('/produk',[ProdukController::class, 'tambah']);
-Route::get('/beliproduk/{id}',[ProdukController::class, 'index_beli']);
 Route::post('/beliproduk/{id}',[ProdukController::class, 'beli']);
 
 Route::get('/profil', function () {
