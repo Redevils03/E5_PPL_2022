@@ -19,7 +19,7 @@ class LoginController extends Controller
     {
         if ($request->email == null || $request->password == null) {
             session()->flash('Empty', 'Silahkan Isi Semua Data');
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
 
         $credentials = $request->validate([

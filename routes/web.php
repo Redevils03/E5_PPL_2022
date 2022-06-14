@@ -23,7 +23,15 @@ Route::post('/chat/{id}', [RegisterController::class, 'chat']);
 
 Route::get('/produk',[ProdukController::class, 'index']);
 Route::get('/produk/{id}',[ProdukController::class, 'hapus']);
+Route::get('/hapus_pembayaran/{id}',[ProdukController::class, 'hapus_pembayaran']);
+Route::get('/pembelian/{id}',[ProdukController::class, 'hapus_pembelian']);
+Route::post('/editpembelian/{id}',[ProdukController::class, 'edit_pembelian']);
 Route::post('/editproduk/{id}',[ProdukController::class, 'edit']);
+Route::post('/bayar/{id}',[ProdukController::class, 'bayar']);
+Route::get('/terima/{id}',[ProdukController::class, 'terima']);
+Route::get('/terima_pembayaran/{id}',[ProdukController::class, 'terima_pembayaran']);
+Route::get('/admin_hapus_pembelian/{id}',[ProdukController::class, 'admin_hapus_pembelian']);
+Route::get('/admin_konfirmasi/{id}',[ProdukController::class, 'admin_konfirmasi']);
 Route::post('/produk',[ProdukController::class, 'tambah']);
 Route::post('/beliproduk/{id}',[ProdukController::class, 'beli']);
 

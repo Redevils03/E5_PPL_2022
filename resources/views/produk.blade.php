@@ -30,6 +30,7 @@
                         $('#tambahShow').modal('show');
                     });
                 </script>
+                @php session()->forget('Empty') @endphp
             @endif
 
             @if (session()->has('editEmpty')) 
@@ -42,6 +43,7 @@
                         $("#tombol_edit").click(); 
                     });
                 </script>
+                @php session()->forget('editEmpty') @endphp
             @endif
 
             @if (session()->has('beliEmpty')) 
@@ -54,9 +56,8 @@
                         $("#tombol_beli").click(); 
                     });
                 </script>
+                @php session()->forget('beliEmpty') @endphp
             @endif
-
-            @php session()->forget('Empty') @endphp
         @endif
         {{-- Formulir modal tambah produk --}}
         <div class="modal fade" id="tambahShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -185,7 +186,8 @@
                                                 </div>
                                                 <form class="modal-body text-black" action="/beliproduk/{{ $data->id }}" method="post">
                                                     @csrf
-                                                    <input name="jumlah_produk" id="jumlah" type="number" class="form-control" value="1">
+                                                    <input name="jumlah_produk" id="jumlah" type="number" class="form-control" value="1" min="1" max="{{ $data->jumlah_produk }}" oninvalid="setCustomValidity('Pesanan produk minimal 1 dan maksimal stok produk saat ini!')"
+                                                    onchange="try{setCustomValidity('')}catch(e){}">
                                                     <div class="border-0 d-flex mt-4">
                                                         <p class="me-auto"></p>
                                                         <button type="submit" class="btn btn-success shadow-none"><b>Beli</b></button>
@@ -195,7 +197,9 @@
                                         </div>
                                     </div>
 
-                                    <a><button type="submit" id="tombol_beli" class="btn btn-success btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#beliShow{{ $data->id }}">Beli</button></a>
+                                    @if ($data->jumlah_produk > 0)
+                                        <a><button type="submit" id="tombol_beli" class="btn btn-success btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#beliShow{{ $data->id }}">Beli</button></a>
+                                    @endif
                                 @endif
                             </div>
                         </div>

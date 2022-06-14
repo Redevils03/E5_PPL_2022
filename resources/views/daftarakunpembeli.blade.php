@@ -55,9 +55,9 @@
                                         <img src='img/foto_null.png' class='rounded-circle foto'>
                                         ";
                                     } else {
-                                        $foto = 'data:image/jpeg;base64,' . base64_encode($data->gambar);
+                                        $foto = asset('storage/' . $data->gambar);
                                         echo "
-                                        <img src={$foto} class='rounded-circle'>
+                                        <img src='{$foto}' class='rounded-circle'>
                                         ";
                                     }
                                     @endphp
