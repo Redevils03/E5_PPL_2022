@@ -13,6 +13,9 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
+Route::post('/tambah_info', [LoginController::class, 'tambah_info']);
+Route::post('/ubah_info', [LoginController::class, 'ubah_info']);
+Route::get('/hapus_info', [LoginController::class, 'hapus_info']);
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
@@ -34,9 +37,20 @@ Route::get('/admin_hapus_pembelian/{id}',[ProdukController::class, 'admin_hapus_
 Route::get('/admin_konfirmasi/{id}',[ProdukController::class, 'admin_konfirmasi']);
 Route::post('/produk',[ProdukController::class, 'tambah']);
 Route::post('/beliproduk/{id}',[ProdukController::class, 'beli']);
+Route::post('/tambah_pendapatan',[ProdukController::class, 'tambah_pendapatan']);
+Route::post('/edit_pendapatan/{id}',[ProdukController::class, 'edit_pendapatan']);
+Route::get('/hapus_pendapatan/{id}',[ProdukController::class, 'hapus_pendapatan']);
 
 Route::get('/profil', function () {
     return view('profil');
+});
+
+Route::get('/infomitra', function () {
+    return view('infomitra');
+});
+
+Route::get('/pendapatan', function () {
+    return view('datapendapatan');
 });
 
 Route::get('/daftarpembeli', function () {

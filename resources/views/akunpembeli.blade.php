@@ -57,7 +57,14 @@
                         <img class="drop1" src="<?= asset('img/drop.png') ?>">
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="">Daftar Akun Pembeli</a></li>
+                        @if (Auth::guard('admin')->check())
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembeli">Daftar Akun Pembeli</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/pendapatan">Data Pendapatan</a></li>
+                        @elseif (Auth::guard('web')->check())
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/chat/{{ Auth::id() }}">Chat Admin</a></li>
+                        @endif
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/daftarpembelian">Daftar Pembelian</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/infomitra">Informasi Mitra</a></li>
                     </ul>
                 </div>
             </div>

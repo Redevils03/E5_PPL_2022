@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\data_produk;
 use App\Models\pembelian;
 use App\Models\detail_pembelian;
+use App\Models\data_pendapatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -87,6 +88,32 @@ class ProdukController extends Controller
         data_produk::create($validateData);
 
         return redirect(('/produk'));
+    }
+
+    public function tambah_pendapatan(Request $request)
+    {
+        if ($request->nama_produk == null || $request->pendapatan == null || $request->pengeluaran == null || $request->keuntungan == null || $request->note == null) {
+            session()->flash('Empty', 'Silahkan Isi Semua Data');
+            return redirect()->back()->withErrors(['Empty', 'Silahkan Isi Semua Data'])->withInput();
+        }
+        
+        $validateData = $request->validate([
+            'nama_produk' => 'required',
+            'pendapatan' => 'required',
+            'pengeluaran' => 'required',
+            'keuntungan' => 'required',
+            'note' => 'required'
+        ]);
+
+        data_pendapatan::create($validateData);
+
+        return redirect('/pendapatan');
+    }
+
+    public function hapus_pendapatan($id)
+    {
+        data_pendapatan::where('id',$id)->delete();
+        return redirect(('/pendapatan'));
     }
     public function hapus($id)
     {
@@ -209,6 +236,25 @@ class ProdukController extends Controller
         pembelian::where([['id_pembeli',Auth::id()],['metode_pembayaran',null]])->update(['total'=>$total_harga]);
 
         return redirect(('/daftarpembelian'));
+    }
+    public function edit_pendapatan(Request $request, $id)
+    {
+        if ($request->nama_produk == null || $request->pendapatan == null || $request->pengeluaran == null || $request->keuntungan == null || $request->note == null) {
+            session()->flash('editEmpty', 'Silahkan Isi Semua Data');
+            return redirect()->back()->withErrors(['editEmpty', 'Silahkan Isi Semua Data'])->withInput();
+        }
+        
+        $validateData = $request->validate([
+            'nama_produk' => 'required',
+            'pendapatan' => 'required',
+            'pengeluaran' => 'required',
+            'keuntungan' => 'required',
+            'note' => 'required'
+        ]);
+
+        data_pendapatan::where([['id',$id]])->update($validateData);
+
+        return redirect('/pendapatan');
     }
     public function beli(Request $request, $id)
     {
