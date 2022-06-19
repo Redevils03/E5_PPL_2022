@@ -157,7 +157,7 @@
                             <div>
                                 <label style="color: white; font-weight: 600;">Upload Gambar</label>
                                 <input  name='foto' class="form-control" type="file" placeholder="Foto Profil">
-                                <input type="email" name="email" id="email" class="mt-4 form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" value="{{ old ('email') }}">
+                                <input type="email" name="email" id="email" class="mt-4 form-control @error('email') is-invalid @enderror" placeholder="Masukkan Email" value="{{Auth::user()->email}}">
                                 @error('email')
                                     <div class="invalid-feedback">
                                         Mohon isikan email dengan format yang sesuai.
@@ -169,19 +169,19 @@
                                         Mohon isikan password dengan minimal 6 karakter dan maksimal 15 karakter.
                                     </div>
                                 @enderror
-                                <input name="nama" id="nama" type="text" class="form-control mt-4 @error('nama') is-invalid @enderror" placeholder="Masukkan nama" value="{{ old ('nama') }}">
+                                <input name="nama" id="nama" type="text" class="form-control mt-4 @error('nama') is-invalid @enderror" placeholder="Masukkan nama" value="{{Auth::user()->nama}}">
                                 @error('nama')
                                     <div class="invalid-feedback">
                                         Mohon isikan nama dengan maksimal 30 karakter.
                                     </div>
                                 @enderror
-                                <input name="nomor_telp" id="nomor_telp" type="number" class="form-control mt-4 @error('nomor_telp') is-invalid @enderror" placeholder="Masukkan nomor telepon" value="{{ old ('nomor_telp') }}">
+                                <input name="nomor_telp" id="nomor_telp" type="number" class="form-control mt-4 @error('nomor_telp') is-invalid @enderror" placeholder="Masukkan nomor telepon" value="{{Auth::user()->nomor_telp}}">
                                 @error('nomor_telp')
                                     <div class="invalid-feedback">
                                         Mohon isikan nomor telepon yang valid.
                                     </div>
                                 @enderror
-                                <input name="alamat" id="alamat" type="text" class="form-control mt-4 @error('alamat') is-invalid @enderror" placeholder="Masukkan alamat" value="{{ old ('alamat') }}">
+                                <input name="alamat" id="alamat" type="text" class="form-control mt-4 @error('alamat') is-invalid @enderror" placeholder="Masukkan alamat" value="{{Auth::user()->alamat}}">
                                 @error('nomor_telp')
                                     <div class="invalid-feedback">
                                         Mohon isikan alamat tempat tinggal saat ini.

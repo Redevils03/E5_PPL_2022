@@ -146,12 +146,13 @@
                                                 <form class="modal-body text-black" action="/editproduk/{{ $data->id }}" method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div>
+                                                        <?php $produk = DB::table('data_produks')->where('id',$data->id)->get(); ?>
                                                         <label style="color: white; font-weight: 600;">Upload Gambar</label>
                                                         <input  name='gambar' class="form-control" type="file" placeholder="Gambar Produk">
-                                                        <input type="text" name="nama_produk" id="nama" class="mt-4 form-control" placeholder="Masukkan Nama Produk">
-                                                        <input name="jumlah_produk" id="jumlah" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Produk">
-                                                        <input name="harga_produk" id="harga" type="number" class="form-control mt-4" placeholder="Masukkan Harga Produk">
-                                                        <input name="harga_asli" id="harga_asli" type="number" class="form-control mt-4" placeholder="Masukkan Harga Asli Produk">
+                                                        <input type="text" name="nama_produk" id="nama" class="mt-4 form-control" placeholder="Masukkan Nama Produk" value="{{ $produk->first()->nama_produk }}">
+                                                        <input name="jumlah_produk" id="jumlah" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Produk"  value="{{ $produk->first()->jumlah_produk }}">
+                                                        <input name="harga_produk" id="harga" type="number" class="form-control mt-4" placeholder="Masukkan Harga Produk"  value="{{ $produk->first()->harga_produk }}">
+                                                        <input name="harga_asli" id="harga_asli" type="number" class="form-control mt-4" placeholder="Masukkan Harga Asli Produk"  value="{{ $produk->first()->harga_asli }}">
                                                     </div>
                                                     <div class="border-0 d-flex mt-4">
                                                         <p class="me-auto"></p>

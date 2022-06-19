@@ -7,7 +7,7 @@ use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
-    return view('landing');
+    return view('LandingPage');
 })->middleware('guest');
 
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
@@ -42,21 +42,21 @@ Route::post('/edit_pendapatan/{id}',[ProdukController::class, 'edit_pendapatan']
 Route::get('/hapus_pendapatan/{id}',[ProdukController::class, 'hapus_pendapatan']);
 
 Route::get('/profil', function () {
-    return view('profil');
+    return view('HalamanProfil');
 });
 
 Route::get('/infomitra', function () {
-    return view('infomitra');
+    return view('HalamanInformasiMitra');
 });
 
 Route::get('/pendapatan', function () {
-    return view('datapendapatan');
+    return view('HalamanDataPendapatan');
 });
 
 Route::get('/daftarpembeli', function () {
-    return view('daftarakunpembeli');
+    return view('HalamanDaftarAkunPembeli');
 });
 
 Route::get('/daftarpembelian', function () {
-    return view('daftarpembelian');
+    return view('HalamanDaftarPembelian');
 });

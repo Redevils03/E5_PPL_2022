@@ -12,21 +12,21 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('register', [
-            'title' => 'register'
+        return view('HalamanRegister', [
+            'title' => 'HalamanRegister'
         ]);
     }
 
     public function data_pembeli($id)
     {
-        return view('akunpembeli', [
+        return view('HalamanDaftarAkunPembeli', [
             'id' => $id
         ]);
     }
 
     public function index_chat($id)
     {
-        return view('chat', [
+        return view('HalamanChat', [
             'id' => $id
         ]);
     }

@@ -11,8 +11,8 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login', [
-            'title' => 'login'
+        return view('HalamanLogin', [
+            'title' => 'HalamanLogin'
         ]);
     }
 

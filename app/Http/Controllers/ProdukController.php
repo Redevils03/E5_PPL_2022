@@ -14,7 +14,7 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        return view('produk');
+        return view('HalamanUtama');
     }
 
     public function terima($id)
@@ -34,6 +34,13 @@ class ProdukController extends Controller
     public function admin_konfirmasi($id)
     {
         pembelian::where([['id',$id]])->update(['status_pembayaran'=>'Diterima']);
+        $detail = DB::table('detail_pembelians')->where([['id_pembelian',$id]])->get();
+        foreach ($detail as $key => $value) {
+            $produk = DB::table('data_produks')->where([['id',$value->id_produk]])->get();
+            $pengeluaran = $value->jumlah * $produk->first()->harga_asli;
+            $keuntungan = $value->total - $pengeluaran;
+            data_pendapatan::create(['nama_produk'=>$value->nama_produk,'pendapatan'=>$value->total,'pengeluaran'=>$pengeluaran,'keuntungan'=>$keuntungan]);
+        }
 
         return redirect(('/daftarpembelian'));
     }

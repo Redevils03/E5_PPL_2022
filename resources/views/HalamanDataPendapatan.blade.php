@@ -116,34 +116,36 @@
                     @endforeach
                 </table>
 
-                {{-- Formulir modal edit data --}}
-                <div class="modal fade" id="editShow{{ $data->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content bg-custom text-white">
-                            <div class="modal-header border-0 text-center">
-                                <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Ubah Data Pendapatan</b></h5>
-                                <a href="/pendapatan"><button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                @foreach ($pendapatan as $key => $data)
+                    {{-- Formulir modal edit data --}}
+                    <div class="modal fade" id="editShow{{ $data->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content bg-custom text-white">
+                                <div class="modal-header border-0 text-center">
+                                    <h5 class="modal-title w-100" id="staticBackdropLabel"><b>Ubah Data Pendapatan</b></h5>
+                                    <a href="/pendapatan"><button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                                </div>
+                                <form class="modal-body text-black" action="/edit_pendapatan/{{ $data->id }}" method="post">
+                                    @csrf
+                                    <div>
+                                        @php
+                                            $detail = DB::table('data_pendapatans')->where('id',$data->id)->get();
+                                        @endphp
+                                        <input type="text" name="nama_produk" id="nama" class="mt-4 form-control" placeholder="Masukkan Nama Produk" value="{{ $detail->first()->nama_produk }}">
+                                        <input name="pendapatan" id="pendapatan" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Pendapatan" value="{{ $detail->first()->pendapatan }}">
+                                        <input name="pengeluaran" id="pengeluaran" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Pengeluaran" value="{{ $detail->first()->pengeluaran }}">
+                                        <input name="keuntungan" id="keuntungan" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Keuntungan" value="{{ $detail->first()->keuntungan }}">
+                                        <input name="note" id="note" type="text" class="form-control mt-4" placeholder="Masukkan Keterangan" value="{{ $detail->first()->note }}">
+                                    </div>
+                                    <div class="border-0 d-flex mt-4">
+                                        <p class="me-auto"></p>
+                                        <button type="submit" class="btn btn-success shadow-none"><b>Ubah</b></button>
+                                    </div>
+                                </form>
                             </div>
-                            <form class="modal-body text-black" action="/edit_pendapatan/{{ $data->id }}" method="post">
-                                @csrf
-                                <div>
-                                    @php
-                                        $detail = DB::table('data_pendapatans')->where('id',$data->id)->get();
-                                    @endphp
-                                    <input type="text" name="nama_produk" id="nama" class="mt-4 form-control" placeholder="Masukkan Nama Produk" value="{{ $detail->first()->nama_produk }}">
-                                    <input name="pendapatan" id="pendapatan" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Pendapatan" value="{{ $detail->first()->pendapatan }}">
-                                    <input name="pengeluaran" id="pengeluaran" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Pengeluaran" value="{{ $detail->first()->pengeluaran }}">
-                                    <input name="keuntungan" id="keuntungan" type="number" class="form-control mt-4" placeholder="Masukkan Jumlah Keuntungan" value="{{ $detail->first()->keuntungan }}">
-                                    <input name="note" id="note" type="text" class="form-control mt-4" placeholder="Masukkan Keterangan" value="{{ $detail->first()->note }}">
-                                </div>
-                                <div class="border-0 d-flex mt-4">
-                                    <p class="me-auto"></p>
-                                    <button type="submit" class="btn btn-success shadow-none"><b>Ubah</b></button>
-                                </div>
-                            </form>
                         </div>
                     </div>
-                </div>
+                @endforeach
 
                 {{-- Formulir modal tambah data --}}
                 <div class="modal fade" id="tambahShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

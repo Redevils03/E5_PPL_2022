@@ -181,7 +181,7 @@
                             <div style="display: inline-flex">
                                 <a href="/admin_konfirmasi/{{ $item->id }}"><button type="submit" class="btn btn-success shadow-none">Konfirmasi</button></a>
                                 <a style="margin-left: 10px;"><button type="button" class="btn btn-danger shadow-none" data-bs-toggle="modal" data-bs-target="#konfir_Show{{ $item->id }}">Hapus Pembayaran</button></a>
-                                <a style="margin-left: 10px;"><button type="button" class="btn btn-danger shadow-none" data-bs-toggle="modal" data-bs-target="#konfirShow{{ $item->id }}"><i class="bi bi-trash3-fill"></i></button></a>
+                                {{-- <a style="margin-left: 10px;"><button type="button" class="btn btn-danger shadow-none" data-bs-toggle="modal" data-bs-target="#konfirShow{{ $item->id }}"><i class="bi bi-trash3-fill"></i></button></a> --}}
                             </div>
                         @elseif ($item->status_pembayaran == 'Diterima' && $item->barang_diterima != 'Diterima')
                             <p style="color: white;">Menunggu Pembeli Konfirmasi Penerimaan Produk...</p>
